@@ -174,7 +174,7 @@ class MyChartAct : AppCompatActivity() {
 
         set1.color = Color.parseColor("#9661F9")
         set1.setCircleColor(Color.parseColor("#9661F9"))
-        set1.mode = LineDataSet.Mode.CUBIC_BEZIER
+        set1.mode = LineDataSet.Mode.HORIZONTAL_BEZIER
 
         val dataSets = ArrayList<ILineDataSet>()
         dataSets.add(set1)
