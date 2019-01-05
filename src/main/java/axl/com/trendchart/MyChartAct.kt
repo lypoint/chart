@@ -182,13 +182,22 @@ class MyChartAct : AppCompatActivity() {
 
     //注册联动
     private fun initChartListener() {
-        chartList[0].onChartGestureListener = MyCoupleChartGestureListener(chartList[0],
-                chartList[1],chartList[2],chartList[3])
-        chartList[1].onChartGestureListener = MyCoupleChartGestureListener(chartList[1],
-                chartList[0],chartList[2],chartList[3])
-        chartList[2].onChartGestureListener = MyCoupleChartGestureListener(chartList[2],
-                chartList[0],chartList[1],chartList[3])
-        chartList[3].onChartGestureListener = MyCoupleChartGestureListener(chartList[3],
-                chartList[0],chartList[1],chartList[2])
+        //多图表联动
+        chartList[0].onChartGestureListener = MyCoupleChartGestureListener(chartList[0], chartList[1],chartList[2],chartList[3])
+        chartList[1].onChartGestureListener = MyCoupleChartGestureListener(chartList[1], chartList[0],chartList[2],chartList[3])
+        chartList[2].onChartGestureListener = MyCoupleChartGestureListener(chartList[2], chartList[0],chartList[1],chartList[3])
+        chartList[3].onChartGestureListener = MyCoupleChartGestureListener(chartList[3], chartList[0],chartList[1],chartList[2])
+
+        //高亮联动
+        chartList[0].setOnChartValueSelectedListener(CoupleChartValueSelectedListener(chartList[0], chartList[1],chartList[2],chartList[3]))
+
+
+        chartList[1].setOnChartValueSelectedListener(CoupleChartValueSelectedListener(chartList[1], chartList[0],chartList[2],chartList[3]))
+
+
+        chartList[2].setOnChartValueSelectedListener(CoupleChartValueSelectedListener(chartList[2], chartList[0],chartList[1],chartList[3]))
+
+
+        chartList[3].setOnChartValueSelectedListener(CoupleChartValueSelectedListener(chartList[3], chartList[0],chartList[1],chartList[2]))
     }
 }
