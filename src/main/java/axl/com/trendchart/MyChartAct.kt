@@ -181,15 +181,13 @@ class MyChartAct : AppCompatActivity() {
 
     //注册联动
     private fun initChartListener() {
-//        for (chartAct in chartList) {
-//            val otherchart = emptyArray<Chart<*>>()
-//            for (chartAct2 in chartList) {
-//                if (chartAct != chartAct2) {
-//                    otherchart.plusElement(chartAct2)
-//                }
-//            }
-//        }
         chartList[0].onChartGestureListener = MyCoupleChartGestureListener(chartList[0],
                 chartList[1],chartList[2],chartList[3])
+        chartList[1].onChartGestureListener = MyCoupleChartGestureListener(chartList[1],
+                chartList[0],chartList[2],chartList[3])
+        chartList[2].onChartGestureListener = MyCoupleChartGestureListener(chartList[2],
+                chartList[0],chartList[1],chartList[3])
+        chartList[3].onChartGestureListener = MyCoupleChartGestureListener(chartList[3],
+                chartList[0],chartList[1],chartList[2])
     }
 }
