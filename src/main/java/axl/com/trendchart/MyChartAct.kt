@@ -59,6 +59,7 @@ class MyChartAct : AppCompatActivity() {
         xAxis.setDrawAxisLine(false)
 
         xAxis.setDrawGridLines(true) //设置x轴上每个点对应的线
+        xAxis.gridLineWidth = 1f
         xAxis.enableGridDashedLine(20f, 5f, 0f)
         xAxis.gridColor = Color.parseColor("#D3CFE5")
         xAxis.valueFormatter = IAxisValueFormatter { value, axis -> value.toInt().toString() }
@@ -166,6 +167,11 @@ class MyChartAct : AppCompatActivity() {
         } else {
             set1.fillColor = Color.BLACK
         }
+        set1.highLightColor = Color.parseColor("#9661F9")
+        set1.enableDashedHighlightLine(20f, 5f, 0f)
+        set1.highlightLineWidth = 1f
+        set1.setDrawHorizontalHighlightIndicator(false)
+
 
         val dataSets = ArrayList<ILineDataSet>()
         dataSets.add(set1)
