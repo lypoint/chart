@@ -56,7 +56,6 @@ class MyChartAct : AppCompatActivity() {
         xAxis.labelCount = 5
         xAxis.setAvoidFirstLastClipping(true)
         xAxis.setDrawAxisLine(false)
-        xAxis.setDrawLimitLinesBehindData(true)
 
         xAxis.setDrawGridLines(true) //设置x轴上每个点对应的线
         xAxis.gridLineWidth = 1f
@@ -78,10 +77,8 @@ class MyChartAct : AppCompatActivity() {
 
         val axisRight = lineChart1.axisRight
         axisRight.setDrawGridLines(false)
-
         axisRight.setDrawAxisLine(false)
         axisRight.setDrawZeroLine(false)
-        axisRight.axisMinimum = 0f
         axisRight.setDrawLabels(false)
         axisRight.setPosition(YAxis.YAxisLabelPosition.OUTSIDE_CHART)
         axisRight.setLabelCount(4, false) //第一个参数是Y轴坐标的个数，第二个参数是 是否不均匀分布，true是不均匀分布
@@ -91,7 +88,6 @@ class MyChartAct : AppCompatActivity() {
         axisLeft.setDrawGridLines(false)
         axisLeft.setDrawZeroLine(false)
         axisLeft.setDrawAxisLine(false)
-        axisRight.axisMinimum = 0f
         axisLeft.setLabelCount(4, false) //第一个参数是Y轴坐标的个数，第二个参数是 是否不均匀分布，true是不均匀分布
     }
 
