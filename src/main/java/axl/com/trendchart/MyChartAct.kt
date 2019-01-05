@@ -56,6 +56,7 @@ class MyChartAct : AppCompatActivity() {
         lineChart1.rendererXAxis
         xAxis.labelCount = 5
         xAxis.setAvoidFirstLastClipping(true)
+        xAxis.setDrawAxisLine(false)
 
         xAxis.setDrawGridLines(true) //设置x轴上每个点对应的线
         xAxis.enableGridDashedLine(20f, 5f, 0f)
