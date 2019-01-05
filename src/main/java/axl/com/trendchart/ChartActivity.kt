@@ -4,7 +4,6 @@ import android.content.Context
 import android.graphics.Color
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
-import android.support.annotation.DrawableRes
 import android.support.v4.content.ContextCompat
 import axl.com.trendchart.mychart.CoupleChartGestureListener
 import axl.com.trendchart.mychart.NewCombinedChart
@@ -19,7 +18,6 @@ import com.github.mikephil.charting.data.LineData
 import com.github.mikephil.charting.data.LineDataSet
 import com.github.mikephil.charting.highlight.Highlight
 import com.github.mikephil.charting.listener.OnChartValueSelectedListener
-import com.github.mikephil.charting.utils.Utils
 import kotlinx.android.synthetic.main.activity_main.*
 import java.util.*
 
