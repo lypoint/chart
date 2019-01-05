@@ -21,7 +21,7 @@ import java.util.ArrayList
 import axl.com.trendchart.widget.MyLineChart
 
 class MyChartAct : AppCompatActivity() {
-    internal var chartList: MutableList<MyLineChart> = ArrayList()
+    var chartList: MutableList<MyLineChart> = arrayListOf()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -50,19 +50,23 @@ class MyChartAct : AppCompatActivity() {
         legend.isEnabled = false
 
         val xAxis = lineChart1.xAxis
-        lineChart1.rendererXAxis
         xAxis.position = XAxis.XAxisPosition.TOP
 
         lineChart1.rendererXAxis
         xAxis.labelCount = 5
         xAxis.setAvoidFirstLastClipping(true)
         xAxis.setDrawAxisLine(false)
+        xAxis.setDrawLimitLinesBehindData(true)
 
         xAxis.setDrawGridLines(true) //设置x轴上每个点对应的线
         xAxis.gridLineWidth = 1f
+        xAxis.gridColor = Color.parseColor("#D3CFE5")
+
         xAxis.enableGridDashedLine(20f, 5f, 0f)
         xAxis.gridColor = Color.parseColor("#D3CFE5")
-        xAxis.valueFormatter = IAxisValueFormatter { value, axis -> value.toInt().toString() }
+        xAxis.valueFormatter = IAxisValueFormatter { value, axis ->
+            value.toInt().toString()
+        }
 
         //设置padding
         if (lineChart1.id == R.id.lineChart1) {
@@ -172,6 +176,9 @@ class MyChartAct : AppCompatActivity() {
         set1.highlightLineWidth = 1f
         set1.setDrawHorizontalHighlightIndicator(false)
 
+        set1.color = Color.parseColor("#9661F9")
+        set1.setCircleColor(Color.parseColor("#9661F9"))
+        set1.mode = LineDataSet.Mode.CUBIC_BEZIER
 
         val dataSets = ArrayList<ILineDataSet>()
         dataSets.add(set1)
