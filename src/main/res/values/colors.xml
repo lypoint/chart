@@ -6,4 +6,101 @@
 
     <color name="quote_grey_color">#AA22AA</color>
     <color name="quote_main_text_color">#AA22AA</color>
+
+    <!-- 主题色+背景色+title色：紫色-->
+    <color name="purple">#FF9661F9</color>
+    <color name="black">#000000</color>
+    <color name="red">#FF0000</color>
+
+    <color name="light">#ffffffff</color>
+    <color name="s12_item_bg">#f8f8f8</color>
+
+    <color name="listview_driver">#dadada</color>
+    <color name="profile_line">#f2f2f2</color>
+    <color name="white">#ffffff</color>
+    <color name="profile_txt">#000000</color>
+    <color name="profile_txt_grey">#bfbfbf</color>
+    <color name="profile_txt_hint">#cdcdcd</color>
+    <color name="transparent">#00000000</color>
+    <color name="purple_light">#f9f6ff</color>
+    <color name="normal_background">#f8fafc</color>
+
+    <color name="color_white">#ffffff</color>
+    <color name="color_white_light">#80ffffff</color>
+
+    <!-- crop view -->
+    <color name="ucrop_color_default_dimmed">#8c000000</color>
+    <color name="ucrop_color_default_crop_frame">#ffffff</color>
+    <color name="ucrop_color_default_crop_grid">#00ffffff</color>
+    <color name="ucrop_color_default_logo">#4f212121</color>
+
+    <color name="red_txt">#fc3b30</color>
+    <color name="change_mobile_txt_grey">#939393</color>
+    <color name="profile_txt_2">#313131</color>
+    <color name="purple_90">#E69661F9</color>
+
+    <color name="color_3">#333333</color>
+    <color name="color_6">#666666</color>
+    <color name="color_9">#999999</color>
+    <color name="color_9_a2">#33999999</color>
+    <color name="timeline_time_color">#666666</color>
+    <color name="timeline_title_color">#333333</color>
+    <color name="timeline_text_color">#999999</color>
+    <color name="action_timeline_time_color">#9b9b9b</color>
+    <color name="action_timeline_sel_time_color">#fd8b26</color>
+    <color name="action_timeline_txt_color">#666666</color>
+    <color name="action_timeline_line">#ededed</color>
+    <color name="action_txt">#303030</color>
+    <color name="action_album_bg">#e0e0e0</color>
+    <color name="pic_bg">#f2ecff</color>
+    <color name="action_dialog_line">#e6e6e6</color>
+    <color name="black_60">#99000000</color>
+    <color name="timeline_top_menu_txt_normal">#FF333333</color>
+    <color name="timeline_top_menu_txt_press">#99333333</color>
+    <color name="star_rank_txt_color">#333333</color>
+    <color name="star_rank_line">#eeeeee</color>
+    <color name="black_30">#4d000000</color>
+    <color name="black_40">#66000000</color>
+    <color name="voice_and_vibrate_bg">#f9f9f9</color>
+    <color name="image_toolbar_bg">#cc151515</color>
+    <color name="topic_selector">#ffa71d</color>
+    <color name="white_10">#1affffff</color>
+    <color name="white_30">#4dffffff</color>
+    <color name="white_40">#66ffffff</color>
+    <color name="white_50">#88ffffff</color>
+    <color name="white_60">#99ffffff</color>
+    <color name="white_80">#ccffffff</color>
+    <color name="white_90">#e6ffffff</color>
+    <color name="black_50">#80000000</color>
+    <color name="black_70">#b2000000</color>
+    <color name="black_80">#cc000000</color>
+    <color name="topic_red_txt">#ff3333</color>
+    <color name="line_app_update">#CCDDDDDD</color>
+    <color name="picker_txt">#FFFFFFFF</color>
+    <color name="picker_no_txt">#33FFFFFF</color>
+    <color name="shade">#99FFFFFF</color>
+    <color name="sliding_press">#99FFFFFF</color>
+    <color name="sliding_normal">#FFFFFFFF</color>
+    <color name="black_15">#26000000</color>
+    <color name="color_f7">#F7F7F7</color>
+    <color name="see_all">#9A40FF</color>
+    <color name="border_color">#eeeeee</color>
+    <color name="large_btn_nomal">#9661f9</color>
+    <color name="large_btn_press">#864ee5</color>
+    <color name="msg_line">#ebebeb</color>
+    <color name="color_28">#282828</color>
+    <color name="btn_disable">#D6B2FF</color>
+    <color name="image_picker_bg">#484848</color>
+    <color name="timeline_hot_num">#F46A56</color>
+    <color name="camera_bg">#F2F2F2</color>
+    <color name="publish_hint">#DBDBDB</color>
+    <color name="live_start">#9966FF</color>
+    <color name="live_line">#979797</color>
+    <color name="live_cover_bg">#3A3545</color>
+    <color name="live_show_line">#EAEAEA</color>
+    <color name="live_show_hint">#DDDDDD</color>
+    <color name="d9d9d9">#D9D9D9</color>
+
+
+    <color name="shine_txt">#F56200</color>
 </resources>
