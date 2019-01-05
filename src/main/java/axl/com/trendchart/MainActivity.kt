@@ -31,6 +31,9 @@ class MainActivity : AppCompatActivity() {
             openActivity(MyChartAct::class.java)
         }
 
+    }
+
+    fun combine(){
         initKline(this, newCombinedChart)
         initKline(this, newCombinedChart2)
         initKline(this, newCombinedChart3)
@@ -104,7 +107,6 @@ class MainActivity : AppCompatActivity() {
             newCombinedChart2.moveViewToX(newCombinedChart.xChartMax)
             newCombinedChart3.moveViewToX(newCombinedChart.xChartMax)
         }
-
     }
 
 
