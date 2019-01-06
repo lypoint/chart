@@ -22,6 +22,7 @@ import com.github.mikephil.charting.utils.Utils
 import java.util.ArrayList
 
 import axl.com.trendchart.widget.MyLineChart
+import axl.com.trendchart.widget.MyXAxisRenderer
 
 class MyChartAct : AppCompatActivity() {
     var chartList: MutableList<MyLineChart> = arrayListOf()
@@ -69,19 +70,48 @@ class MyChartAct : AppCompatActivity() {
         xAxis.enableGridDashedLine(20f, 5f, 0f)
         xAxis.gridColor = Color.parseColor("#D3CFE5")
         xAxis.valueFormatter = IAxisValueFormatter { value, axis ->
-            if (value==29f){
-                "昨日"
-            }else if (value==1f){
-                "12月/r/n"+value.toInt().toString() + "日"
-            }else {
-                value.toInt().toString() + "日"
+            when (value) {
+                29f -> "昨日"
+                28f -> "3日"
+                27f -> "2日"
+                26f -> "12月/n1日"
+                25f -> "30日"
+                24f -> "29日"
+                23f -> "28日"
+                22f -> "27日"
+                21f -> "26日"
+                20f -> "25日"
+
+                19f -> "24日"
+                18f -> "23日"
+                17f -> "22日"
+                16f -> "21日"
+                15f -> "20日"
+                14f -> "19日"
+                13f -> "18日"
+                12f -> "17日"
+                11f -> "16日"
+                10f -> "15日"
+
+                9f -> "14日"
+                8f -> "13日"
+                7f -> "12日"
+                6f -> "11日"
+                5f -> "10日"
+                4f -> "9日"
+                3f -> "8日"
+                2f -> "7日"
+                1f -> "6日"
+                0f -> "5日"
+                else -> ""
             }
         }
-
         //设置padding
         if (lineChart1.id == R.id.lineChart1) {
             lineChart1.isFirst = true
             lineChart1.setViewPortOffsets(Utils.convertDpToPixel(5f), Utils.convertDpToPixel(45f), Utils.convertDpToPixel(94f), Utils.convertDpToPixel(0f))
+            var myXAxisRenderer = MyXAxisRenderer(lineChart1.viewPortHandler, xAxis, lineChart1.getTransformer(YAxis.AxisDependency.LEFT))
+            lineChart1.setXAxisRenderer(myXAxisRenderer)
         } else {
             lineChart1.setViewPortOffsets(Utils.convertDpToPixel(5f), Utils.convertDpToPixel(0f), Utils.convertDpToPixel(94f), Utils.convertDpToPixel(0f))
         }
