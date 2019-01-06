@@ -4,6 +4,7 @@ import android.graphics.Color
 import android.os.Bundle
 import android.support.v4.content.ContextCompat
 import android.support.v7.app.AppCompatActivity
+import android.util.Log
 import android.view.View
 
 import com.github.mikephil.charting.charts.Chart
@@ -28,6 +29,7 @@ class MyChartAct : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.my_chart)
         chartList.add(findViewById<View>(R.id.floatChart1) as MyLineChart)
+
         chartList.add(findViewById<View>(R.id.lineChart1) as MyLineChart)
         chartList.add(findViewById<View>(R.id.lineChart2) as MyLineChart)
         chartList.add(findViewById<View>(R.id.lineChart3) as MyLineChart)
@@ -363,10 +365,10 @@ class MyChartAct : AppCompatActivity() {
         xAxisData["昨日"] = XAXisModel("", "昨日", false)
         xAxisData["3日"] = XAXisModel("", "3日", false)
         xAxisData["2日"] = XAXisModel("", "2日", false)
-        xAxisData["12月1日"] = XAXisModel("(12月)", "1日", true)
+        xAxisData["12月1日"] = XAXisModel("(12月)", "1日", false)
         xAxisData["30日"] = XAXisModel("", "30日", false)
         xAxisData["29日"] = XAXisModel("", "29日", false)
-        xAxisData["28日"] = XAXisModel("", "28日", true)
+        xAxisData["28日"] = XAXisModel("", "28日", false)
         xAxisData["27日"] = XAXisModel("", "27日", false)
         xAxisData["26日"] = XAXisModel("", "26日", false)
         xAxisData["25日"] = XAXisModel("", "25日", false)
@@ -523,6 +525,13 @@ class MyChartAct : AppCompatActivity() {
         }
 
         override fun valueSelected(e: Entry?) {
+            val values = xAxisData.values
+            for (value in values){
+                value.isSelected = false
+            }
+            val formattedValue = chartList[0].xAxis.valueFormatter.getFormattedValue(e?.x!!, chartList[0].xAxis)
+            var value = xAxisData[formattedValue]
+            value?.isSelected = true
         }
 
     }
