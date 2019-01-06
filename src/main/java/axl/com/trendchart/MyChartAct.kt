@@ -69,7 +69,13 @@ class MyChartAct : AppCompatActivity() {
         xAxis.enableGridDashedLine(20f, 5f, 0f)
         xAxis.gridColor = Color.parseColor("#D3CFE5")
         xAxis.valueFormatter = IAxisValueFormatter { value, axis ->
-            value.toInt().toString()
+            if (value==29f){
+                "昨日"
+            }else if (value==1f){
+                "12月/r/n"+value.toInt().toString() + "日"
+            }else {
+                value.toInt().toString() + "日"
+            }
         }
 
         //设置padding
