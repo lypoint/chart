@@ -4,6 +4,9 @@ import android.graphics.Color
 import android.os.Bundle
 import android.support.v4.content.ContextCompat
 import android.support.v7.app.AppCompatActivity
+import android.text.SpannableString
+import android.text.Spanned
+import android.text.style.ForegroundColorSpan
 import android.view.View
 
 import com.github.mikephil.charting.charts.Chart
@@ -22,7 +25,7 @@ import axl.com.trendchart.widget.MyLineChart
 
 class MyChartAct : AppCompatActivity() {
     var chartList: MutableList<MyLineChart> = arrayListOf()
-
+    var visiableCount = 4
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.my_chart)
@@ -30,6 +33,8 @@ class MyChartAct : AppCompatActivity() {
         chartList.add(findViewById<View>(R.id.lineChart2) as MyLineChart)
         chartList.add(findViewById<View>(R.id.lineChart3) as MyLineChart)
         chartList.add(findViewById<View>(R.id.lineChart4) as MyLineChart)
+        chartList.add(findViewById<View>(R.id.lineChart5) as MyLineChart)
+        chartList.add(findViewById<View>(R.id.lineChart6) as MyLineChart)
 
         for (chartAct in chartList) {
             initKline(chartAct)
@@ -53,7 +58,7 @@ class MyChartAct : AppCompatActivity() {
         xAxis.position = XAxis.XAxisPosition.TOP
 
         lineChart1.rendererXAxis
-        xAxis.labelCount = 5
+        xAxis.labelCount = visiableCount
         xAxis.setAvoidFirstLastClipping(true)
         xAxis.setDrawAxisLine(false)
 
@@ -183,7 +188,7 @@ class MyChartAct : AppCompatActivity() {
 
         lineChart1.data = data
 
-        lineChart1.setVisibleXRange(5f, 5f)
+        lineChart1.setVisibleXRange(visiableCount.toFloat(), visiableCount.toFloat())
 
         //设置滚动到最后一个数据
         lineChart1.moveViewToX(lineChart1.xChartMax)
@@ -191,22 +196,17 @@ class MyChartAct : AppCompatActivity() {
 
     //注册联动
     private fun initChartListener() {
-        //多图表联动
-        chartList[0].onChartGestureListener = MyCoupleChartGestureListener(chartList[0], chartList[1],chartList[2],chartList[3])
-        chartList[1].onChartGestureListener = MyCoupleChartGestureListener(chartList[1], chartList[0],chartList[2],chartList[3])
-        chartList[2].onChartGestureListener = MyCoupleChartGestureListener(chartList[2], chartList[0],chartList[1],chartList[3])
-        chartList[3].onChartGestureListener = MyCoupleChartGestureListener(chartList[3], chartList[0],chartList[1],chartList[2])
-
-        //高亮联动
-        chartList[0].setOnChartValueSelectedListener(CoupleChartValueSelectedListener(chartList[0], chartList[1],chartList[2],chartList[3]))
-
-
-        chartList[1].setOnChartValueSelectedListener(CoupleChartValueSelectedListener(chartList[1], chartList[0],chartList[2],chartList[3]))
-
-
-        chartList[2].setOnChartValueSelectedListener(CoupleChartValueSelectedListener(chartList[2], chartList[0],chartList[1],chartList[3]))
-
-
-        chartList[3].setOnChartValueSelectedListener(CoupleChartValueSelectedListener(chartList[3], chartList[0],chartList[1],chartList[2]))
+        for (src in chartList) {
+            var array = arrayListOf<Chart<*>>()
+            for (item in chartList) {
+                if (src != item) {
+                    array.add(item)
+                }
+            }
+            //多图表联动
+            src.onChartGestureListener = MyCoupleChartGestureListener(src, array)
+            //高亮联动
+            src.setOnChartValueSelectedListener(CoupleChartValueSelectedListener(src, array))
+        }
     }
 }

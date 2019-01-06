@@ -9,23 +9,25 @@ import com.github.mikephil.charting.listener.BarLineChartTouchListener;
 import com.github.mikephil.charting.listener.ChartTouchListener;
 import com.github.mikephil.charting.listener.OnChartGestureListener;
 
+import java.util.List;
+
 public class MyCoupleChartGestureListener implements OnChartGestureListener {
 
     private BarLineChartBase srcChart;
-    private Chart[] dstCharts;
+    private List<Chart> dstCharts;
 
     private OnEdgeListener edgeListener;//滑动到边缘的监听器
     private boolean isLoadMore;//是否加载更多
     private boolean canLoad;//K线图手指交互已停止，正在惯性滑动
 
-    public MyCoupleChartGestureListener(BarLineChartBase srcChart, Chart... dstCharts) {
+    public MyCoupleChartGestureListener(BarLineChartBase srcChart, List<Chart> dstCharts) {
         this.srcChart = srcChart;
         this.dstCharts = dstCharts;
         isLoadMore = false;
     }
 
     public MyCoupleChartGestureListener(OnEdgeListener edgeListener, BarLineChartBase srcChart,
-                                      Chart... dstCharts) {
+                                        List<Chart> dstCharts) {
         this.edgeListener = edgeListener;
         this.srcChart = srcChart;
         this.dstCharts = dstCharts;

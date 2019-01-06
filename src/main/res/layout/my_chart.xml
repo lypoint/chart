@@ -72,5 +72,38 @@
                 android:layout_height="84dp"
                 android:layout_alignParentRight="true" />
         </RelativeLayout>
+
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <axl.com.trendchart.widget.MyLineChart
+                android:id="@+id/lineChart5"
+                android:layout_width="match_parent"
+                android:layout_height="90dp" />
+
+            <include
+                layout="@layout/total_info"
+                android:layout_width="94dp"
+                android:layout_height="84dp"
+                android:layout_alignParentRight="true" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <axl.com.trendchart.widget.MyLineChart
+                android:id="@+id/lineChart6"
+                android:layout_width="match_parent"
+                android:layout_height="90dp" />
+
+            <include
+                layout="@layout/total_info"
+                android:layout_width="94dp"
+                android:layout_height="84dp"
+                android:layout_alignParentRight="true" />
+        </RelativeLayout>
     </LinearLayout>
 </ScrollView>

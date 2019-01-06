@@ -2,23 +2,26 @@ package axl.com.trendchart;
 
 import com.github.mikephil.charting.charts.BarChart;
 import com.github.mikephil.charting.charts.BarLineChartBase;
+import com.github.mikephil.charting.charts.Chart;
 import com.github.mikephil.charting.charts.CombinedChart;
 import com.github.mikephil.charting.data.Entry;
 import com.github.mikephil.charting.highlight.Highlight;
 import com.github.mikephil.charting.listener.OnChartValueSelectedListener;
 
+import java.util.List;
+
 public class CoupleChartValueSelectedListener implements OnChartValueSelectedListener {
 
     private BarLineChartBase srcChart;
-    private BarLineChartBase[] dstCharts;
+    private List<Chart> dstCharts;
     private ValueSelectedListener mListener;
 
-    public CoupleChartValueSelectedListener(BarLineChartBase srcChart, BarLineChartBase... dstCharts) {
+    public CoupleChartValueSelectedListener(BarLineChartBase srcChart, List<Chart> dstCharts) {
         this(null, srcChart, dstCharts);
     }
 
     public CoupleChartValueSelectedListener(ValueSelectedListener mListener,
-                                            BarLineChartBase srcChart, BarLineChartBase... dstCharts) {
+                                            BarLineChartBase srcChart, List<Chart> dstCharts) {
         this.mListener = mListener;
         this.srcChart = srcChart;
         this.dstCharts = dstCharts;
@@ -27,7 +30,7 @@ public class CoupleChartValueSelectedListener implements OnChartValueSelectedLis
     @Override
     public void onValueSelected(Entry e, Highlight h) {
         if (dstCharts != null) {
-            for (BarLineChartBase chart : dstCharts) {
+            for (Chart chart : dstCharts) {
                 float touchY = h.getDrawY();//手指接触点在srcChart上的Y坐标，即手势监听器中保存数据
                 float y = h.getY();
                 if (chart instanceof BarChart) {
@@ -48,7 +51,7 @@ public class CoupleChartValueSelectedListener implements OnChartValueSelectedLis
     @Override
     public void onNothingSelected() {
         if (dstCharts != null) {
-            for (BarLineChartBase chart : dstCharts) {
+            for (Chart chart : dstCharts) {
                 chart.highlightValues(null);
             }
         }
