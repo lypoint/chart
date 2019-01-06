@@ -21,7 +21,8 @@ class MyXAxisRenderer(var xAxisData: HashMap<String, XAXisModel>, viewPortHandle
     private val unSelectBottom = 15
     //可绘制的总体高度
     private val xAxisHeight = Utils.convertDpToPixel(45f)
-
+    //是否漂浮
+    private var isFloat = false
     override fun drawLabels(c: Canvas, pos: Float, anchor: MPPointF) {
         val labelRotationAngleDegrees = mXAxis.labelRotationAngle
         val centeringEnabled = mXAxis.isCenterAxisLabelsEnabled

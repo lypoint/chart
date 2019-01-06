@@ -28,23 +28,183 @@ class MyChartAct : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.my_chart)
         chartList.add(findViewById<View>(R.id.floatChart1) as MyLineChart)
-//        chartList.add(findViewById<View>(R.id.lineChart1) as MyLineChart)
-//        chartList.add(findViewById<View>(R.id.lineChart2) as MyLineChart)
-//        chartList.add(findViewById<View>(R.id.lineChart3) as MyLineChart)
-//        chartList.add(findViewById<View>(R.id.lineChart4) as MyLineChart)
-//        chartList.add(findViewById<View>(R.id.lineChart5) as MyLineChart)
-//        chartList.add(findViewById<View>(R.id.lineChart6) as MyLineChart)
-//        chartList.add(findViewById<View>(R.id.lineChart7) as MyLineChart)
-//        chartList.add(findViewById<View>(R.id.lineChart8) as MyLineChart)
+        chartList.add(findViewById<View>(R.id.lineChart1) as MyLineChart)
+        chartList.add(findViewById<View>(R.id.lineChart2) as MyLineChart)
+        chartList.add(findViewById<View>(R.id.lineChart3) as MyLineChart)
+        chartList.add(findViewById<View>(R.id.lineChart4) as MyLineChart)
+        chartList.add(findViewById<View>(R.id.lineChart5) as MyLineChart)
+        chartList.add(findViewById<View>(R.id.lineChart6) as MyLineChart)
+        chartList.add(findViewById<View>(R.id.lineChart7) as MyLineChart)
+        chartList.add(findViewById<View>(R.id.lineChart8) as MyLineChart)
 
         for (chartAct in chartList) {
-            initKline(chartAct)
+            if (chartAct.id != R.id.floatChart1) {
+                initKline(chartAct)
+            } else {
+                initFloatKline(chartAct)
+            }
             addTestData(chartAct)
         }
         initChartListener()
     }
 
+    //上滑漂浮的klinechart
+    private fun initFloatKline(lineChart1: MyLineChart) {
+        lineChart1.setScaleEnabled(true) //启用图表缩放事件
+        lineChart1.setDrawBorders(false) //是否绘制边线
+        lineChart1.isDragEnabled = true
+        lineChart1.isScaleYEnabled = false
+        lineChart1.minOffset = 0f
+        lineChart1.description = null
+
+        val legend = lineChart1.legend
+        legend.isEnabled = false
+
+        val xAxis = lineChart1.xAxis
+        xAxis.position = XAxis.XAxisPosition.TOP
+
+        lineChart1.rendererXAxis
+        xAxis.labelCount = visiableCount
+        //        xAxis.setAvoidFirstLastClipping(true)
+        xAxis.setDrawAxisLine(false)
+
+        xAxis.setDrawGridLines(false) //设置x轴上每个点对应的线
+        xAxis.gridLineWidth = 1f
+        xAxis.gridColor = Color.parseColor("#D3CFE5")
+
+        //        xAxis.enableGridDashedLine(20f, 5f, 0f)
+        //        xAxis.gridColor = Color.parseColor("#D3CFE5")
+        addXAXisTestData()
+        xAxis.valueFormatter = IAxisValueFormatter { value, axis ->
+            when (value) {
+                29f -> {
+                    "昨日"
+                }
+                28f -> {
+
+                    "3日"
+                }
+                27f -> {
+
+                    "2日"
+                }
+                26f -> {
+                    "12月1日"
+                }
+                25f -> {
+                    "30日"
+                }
+                24f -> {
+                    "29日"
+                }
+                23f -> {
+                    "28日"
+                }
+                22f -> {
+                    "27日"
+                }
+                21f -> {
+                    "26日"
+                }
+                20f -> {
+                    "25日"
+                }
+
+                19f -> {
+                    "24日"
+                }
+                18f -> {
+                    "23日"
+                }
+                17f -> {
+                    "22日"
+                }
+                16f -> {
+                    "21日"
+                }
+                15f -> {
+                    "20日"
+                }
+                14f -> {
+                    "19日"
+                }
+                13f -> {
+
+                    "18日"
+                }
+                12f -> {
+                    "17日"
+                }
+                11f -> {
+                    "16日"
+                }
+                10f -> {
+
+                    "15日"
+                }
+                9f -> {
+                    "14日"
+                }
+                8f -> {
+                    "13日"
+                }
+                7f -> {
+
+                    "12日"
+                }
+                6f -> {
+                    "11日"
+                }
+                5f -> {
+                    "10日"
+                }
+                4f -> {
+                    "9日"
+                }
+                3f -> {
+                    "8日"
+                }
+                2f -> {
+                    "7日"
+                }
+                1f -> {
+
+                    "6日"
+                }
+                0f -> {
+                    "5日"
+                }
+                else -> ""
+            }
+        }
+        //设置padding
+        lineChart1.isFirst = true
+        lineChart1.isDrawDivider = false
+
+        //        lineChart1.setViewPortOffsets(0f,0f,0f,0f)
+        lineChart1.setViewPortOffsets(Utils.convertDpToPixel(5f), //left
+                Utils.convertDpToPixel(45f), Utils.convertDpToPixel(94f), Utils.convertDpToPixel(45f))
+        var myXAxisRenderer = MyXAxisRenderer(xAxisData, lineChart1.viewPortHandler, xAxis, lineChart1.getTransformer(YAxis.AxisDependency.LEFT))
+        lineChart1.setXAxisRenderer(myXAxisRenderer)
+
+        val axisRight = lineChart1.axisRight
+        axisRight.setDrawGridLines(false)
+        axisRight.setDrawAxisLine(false)
+        axisRight.setDrawZeroLine(false)
+        axisRight.setDrawLabels(false)
+        axisRight.setPosition(YAxis.YAxisLabelPosition.OUTSIDE_CHART)
+        axisRight.setLabelCount(0, false) //第一个参数是Y轴坐标的个数，第二个参数是 是否不均匀分布，true是不均匀分布
+
+        val axisLeft = lineChart1.axisLeft
+        axisLeft.setDrawLabels(false)
+        axisLeft.setDrawGridLines(false)
+        axisLeft.setDrawZeroLine(false)
+        axisLeft.setDrawAxisLine(false)
+        axisLeft.setLabelCount(0, false) //第一个参数是Y轴坐标的个数，第二个参数是 是否不均匀分布，true是不均匀分布
+    }
+
     var xAxisData = HashMap<String, XAXisModel>()
+    //普通的kline
     private fun initKline(lineChart1: MyLineChart) {
         lineChart1.setScaleEnabled(true) //启用图表缩放事件
         lineChart1.setDrawBorders(false) //是否绘制边线
@@ -299,24 +459,34 @@ class MyChartAct : AppCompatActivity() {
         }
 
         val set1 = LineDataSet(values, "")
-
-        //颜色填充的渐变
-        set1.setDrawFilled(true) //必须加上这一句，否则没有填充渐变
-        if (Utils.getSDKInt() >= 18) {
-            val drawable = ContextCompat.getDrawable(this, R.drawable.fade_red)
-            set1.fillDrawable = drawable
+        if (lineChart1.id == R.id.floatChart1) {
+            set1.setDrawFilled(false)
+            set1.setDrawHighlightIndicators(false)
+            set1.setDrawCircles(false)
+            set1.setDrawCircleHole(false)
+            set1.setDrawHorizontalHighlightIndicator(false)
+            set1.setDrawIcons(false)
+            set1.setDrawHighlightIndicators(false)
+            set1.setDrawValues(false)
+            set1.lineWidth = 0f
         } else {
-            set1.fillColor = Color.BLACK
+            //颜色填充的渐变
+            set1.setDrawFilled(true) //必须加上这一句，否则没有填充渐变
+            if (Utils.getSDKInt() >= 18) {
+                val drawable = ContextCompat.getDrawable(this, R.drawable.fade_red)
+                set1.fillDrawable = drawable
+            } else {
+                set1.fillColor = Color.BLACK
+            }
+            set1.highLightColor = Color.parseColor("#9661F9")
+            set1.enableDashedHighlightLine(20f, 5f, 0f)
+            set1.highlightLineWidth = 1f
+            set1.setDrawHorizontalHighlightIndicator(false)
+
+            set1.color = Color.parseColor("#9661F9")
+            set1.setCircleColor(Color.parseColor("#9661F9"))
+            set1.mode = LineDataSet.Mode.HORIZONTAL_BEZIER
         }
-        set1.highLightColor = Color.parseColor("#9661F9")
-        set1.enableDashedHighlightLine(20f, 5f, 0f)
-        set1.highlightLineWidth = 1f
-        set1.setDrawHorizontalHighlightIndicator(false)
-
-        set1.color = Color.parseColor("#9661F9")
-        set1.setCircleColor(Color.parseColor("#9661F9"))
-        set1.mode = LineDataSet.Mode.HORIZONTAL_BEZIER
-
         val dataSets = ArrayList<ILineDataSet>()
         dataSets.add(set1)
 
@@ -325,6 +495,7 @@ class MyChartAct : AppCompatActivity() {
         lineChart1.data = data
 
         lineChart1.setVisibleXRange(visiableCount.toFloat(), visiableCount.toFloat())
+
 
         //设置滚动到最后一个数据
         lineChart1.moveViewToX(lineChart1.xChartMax)
