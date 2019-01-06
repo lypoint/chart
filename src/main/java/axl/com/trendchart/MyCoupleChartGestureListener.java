@@ -5,6 +5,7 @@ import android.view.MotionEvent;
 
 import com.github.mikephil.charting.charts.BarLineChartBase;
 import com.github.mikephil.charting.charts.Chart;
+import com.github.mikephil.charting.listener.BarLineChartTouchListener;
 import com.github.mikephil.charting.listener.ChartTouchListener;
 import com.github.mikephil.charting.listener.OnChartGestureListener;
 
@@ -34,6 +35,10 @@ public class MyCoupleChartGestureListener implements OnChartGestureListener {
     @Override
     public void onChartGestureStart(MotionEvent me, ChartTouchListener.ChartGesture lastPerformedGesture) {
         canLoad = false;
+        ((BarLineChartTouchListener) srcChart.getOnTouchListener()).stopDeceleration();
+        for (Chart chart : dstCharts) {
+            ((BarLineChartTouchListener) chart.getOnTouchListener()).stopDeceleration();
+        }
         syncCharts();
         chartGestureStart(me, lastPerformedGesture);
     }
