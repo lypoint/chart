@@ -27,14 +27,15 @@ class MyChartAct : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.my_chart)
-        chartList.add(findViewById<View>(R.id.lineChart1) as MyLineChart)
-        chartList.add(findViewById<View>(R.id.lineChart2) as MyLineChart)
-        chartList.add(findViewById<View>(R.id.lineChart3) as MyLineChart)
-        chartList.add(findViewById<View>(R.id.lineChart4) as MyLineChart)
-        chartList.add(findViewById<View>(R.id.lineChart5) as MyLineChart)
-        chartList.add(findViewById<View>(R.id.lineChart6) as MyLineChart)
-        chartList.add(findViewById<View>(R.id.lineChart7) as MyLineChart)
-        chartList.add(findViewById<View>(R.id.lineChart8) as MyLineChart)
+        chartList.add(findViewById<View>(R.id.floatChart1) as MyLineChart)
+//        chartList.add(findViewById<View>(R.id.lineChart1) as MyLineChart)
+//        chartList.add(findViewById<View>(R.id.lineChart2) as MyLineChart)
+//        chartList.add(findViewById<View>(R.id.lineChart3) as MyLineChart)
+//        chartList.add(findViewById<View>(R.id.lineChart4) as MyLineChart)
+//        chartList.add(findViewById<View>(R.id.lineChart5) as MyLineChart)
+//        chartList.add(findViewById<View>(R.id.lineChart6) as MyLineChart)
+//        chartList.add(findViewById<View>(R.id.lineChart7) as MyLineChart)
+//        chartList.add(findViewById<View>(R.id.lineChart8) as MyLineChart)
 
         for (chartAct in chartList) {
             initKline(chartAct)

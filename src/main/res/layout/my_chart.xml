@@ -1,142 +1,156 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
 
-    <LinearLayout
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical">
+        android:layout_height="wrap_content">
 
-        <RelativeLayout
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="match_parent"
+            android:orientation="vertical">
 
-            <axl.com.trendchart.widget.MyLineChart
-                android:id="@+id/lineChart1"
+            <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="145dp" />
+                android:layout_height="wrap_content">
 
-            <include
-                layout="@layout/total_info"
-                android:layout_width="94dp"
-                android:layout_marginTop="45dp"
-                android:layout_height="84dp"
-                android:layout_alignParentRight="true" />
-        </RelativeLayout>
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+                <axl.com.trendchart.widget.MyLineChart
+                    android:id="@+id/lineChart1"
+                    android:layout_width="match_parent"
+                    android:layout_height="145dp" />
 
-            <axl.com.trendchart.widget.MyLineChart
-                android:id="@+id/lineChart2"
+                <include
+                    layout="@layout/total_info"
+                    android:layout_width="94dp"
+                    android:layout_height="84dp"
+                    android:layout_alignParentRight="true"
+                    android:layout_marginTop="45dp" />
+            </RelativeLayout>
+
+            <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="90dp" />
+                android:layout_height="wrap_content">
 
-            <include
-                layout="@layout/total_info"
-                android:layout_width="94dp"
-                android:layout_height="84dp"
-                android:layout_alignParentRight="true" />
-        </RelativeLayout>
+                <axl.com.trendchart.widget.MyLineChart
+                    android:id="@+id/lineChart2"
+                    android:layout_width="match_parent"
+                    android:layout_height="90dp" />
 
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+                <include
+                    layout="@layout/total_info"
+                    android:layout_width="94dp"
+                    android:layout_height="84dp"
+                    android:layout_alignParentRight="true" />
+            </RelativeLayout>
 
-            <axl.com.trendchart.widget.MyLineChart
-                android:id="@+id/lineChart3"
+            <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="90dp" />
+                android:layout_height="wrap_content">
 
-            <include
-                layout="@layout/total_info"
-                android:layout_width="94dp"
-                android:layout_height="84dp"
-                android:layout_alignParentRight="true" />
-        </RelativeLayout>
+                <axl.com.trendchart.widget.MyLineChart
+                    android:id="@+id/lineChart3"
+                    android:layout_width="match_parent"
+                    android:layout_height="90dp" />
+
+                <include
+                    layout="@layout/total_info"
+                    android:layout_width="94dp"
+                    android:layout_height="84dp"
+                    android:layout_alignParentRight="true" />
+            </RelativeLayout>
 
 
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-
-            <axl.com.trendchart.widget.MyLineChart
-                android:id="@+id/lineChart4"
+            <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="90dp" />
+                android:layout_height="wrap_content">
 
-            <include
-                layout="@layout/total_info"
-                android:layout_width="94dp"
-                android:layout_height="84dp"
-                android:layout_alignParentRight="true" />
-        </RelativeLayout>
+                <axl.com.trendchart.widget.MyLineChart
+                    android:id="@+id/lineChart4"
+                    android:layout_width="match_parent"
+                    android:layout_height="90dp" />
+
+                <include
+                    layout="@layout/total_info"
+                    android:layout_width="94dp"
+                    android:layout_height="84dp"
+                    android:layout_alignParentRight="true" />
+            </RelativeLayout>
 
 
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-
-            <axl.com.trendchart.widget.MyLineChart
-                android:id="@+id/lineChart5"
+            <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="90dp" />
+                android:layout_height="wrap_content">
 
-            <include
-                layout="@layout/total_info"
-                android:layout_width="94dp"
-                android:layout_height="84dp"
-                android:layout_alignParentRight="true" />
-        </RelativeLayout>
+                <axl.com.trendchart.widget.MyLineChart
+                    android:id="@+id/lineChart5"
+                    android:layout_width="match_parent"
+                    android:layout_height="90dp" />
 
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+                <include
+                    layout="@layout/total_info"
+                    android:layout_width="94dp"
+                    android:layout_height="84dp"
+                    android:layout_alignParentRight="true" />
+            </RelativeLayout>
 
-            <axl.com.trendchart.widget.MyLineChart
-                android:id="@+id/lineChart6"
+            <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="90dp" />
+                android:layout_height="wrap_content">
 
-            <include
-                layout="@layout/total_info"
-                android:layout_width="94dp"
-                android:layout_height="84dp"
-                android:layout_alignParentRight="true" />
-        </RelativeLayout>
+                <axl.com.trendchart.widget.MyLineChart
+                    android:id="@+id/lineChart6"
+                    android:layout_width="match_parent"
+                    android:layout_height="90dp" />
+
+                <include
+                    layout="@layout/total_info"
+                    android:layout_width="94dp"
+                    android:layout_height="84dp"
+                    android:layout_alignParentRight="true" />
+            </RelativeLayout>
 
 
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-
-            <axl.com.trendchart.widget.MyLineChart
-                android:id="@+id/lineChart7"
+            <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="90dp" />
+                android:layout_height="wrap_content">
 
-            <include
-                layout="@layout/total_info"
-                android:layout_width="94dp"
-                android:layout_height="84dp"
-                android:layout_alignParentRight="true" />
-        </RelativeLayout>
+                <axl.com.trendchart.widget.MyLineChart
+                    android:id="@+id/lineChart7"
+                    android:layout_width="match_parent"
+                    android:layout_height="90dp" />
 
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+                <include
+                    layout="@layout/total_info"
+                    android:layout_width="94dp"
+                    android:layout_height="84dp"
+                    android:layout_alignParentRight="true" />
+            </RelativeLayout>
 
-            <axl.com.trendchart.widget.MyLineChart
-                android:id="@+id/lineChart8"
+            <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="90dp" />
+                android:layout_height="wrap_content">
 
-            <include
-                layout="@layout/total_info"
-                android:layout_width="94dp"
-                android:layout_height="84dp"
-                android:layout_alignParentRight="true" />
-        </RelativeLayout>
-    </LinearLayout>
-</ScrollView>
+                <axl.com.trendchart.widget.MyLineChart
+                    android:id="@+id/lineChart8"
+                    android:layout_width="match_parent"
+                    android:layout_height="90dp" />
+
+                <include
+                    layout="@layout/total_info"
+                    android:layout_width="94dp"
+                    android:layout_height="84dp"
+                    android:layout_alignParentRight="true" />
+            </RelativeLayout>
+        </LinearLayout>
+
+    </ScrollView>
+
+    <axl.com.trendchart.widget.MyLineChart
+        android:id="@+id/floatChart1"
+        android:layout_width="match_parent"
+        android:layout_height="45dp" />
+</RelativeLayout>
+
