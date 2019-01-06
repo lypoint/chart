@@ -1,12 +1,13 @@
 package axl.com.trendchart.widget;
 
 import android.graphics.Canvas;
+import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Rect;
+import android.util.Log;
 
 import com.github.mikephil.charting.components.XAxis;
 import com.github.mikephil.charting.renderer.XAxisRenderer;
-import com.github.mikephil.charting.utils.FSize;
 import com.github.mikephil.charting.utils.MPPointF;
 import com.github.mikephil.charting.utils.Transformer;
 import com.github.mikephil.charting.utils.Utils;
@@ -16,6 +17,10 @@ import com.github.mikephil.charting.utils.ViewPortHandler;
 public class MyXAxisRenderer extends XAxisRenderer {
     private static Paint.FontMetrics mFontMetricsBuffer = new Paint.FontMetrics();
     private static Rect mDrawTextRectBuffer = new Rect();
+    private int selectBottom = 14;
+    private int unSelectBottom = 15;
+    //可绘制的总体高度
+    private float xAxisHeight = Utils.convertDpToPixel(45);
 
     public MyXAxisRenderer(ViewPortHandler viewPortHandler, XAxis xAxis, Transformer trans) {
         super(viewPortHandler, xAxis, trans);
@@ -63,15 +68,16 @@ public class MyXAxisRenderer extends XAxisRenderer {
                         x += width / 2;
                     }
                 }
-                drawXAxisValue(c, label, x, pos,mAxisLabelPaint, anchor, labelRotationAngleDegrees);
+                Log.e("drawXAxisValue,","label="+label+",x="+x+",pos="+pos);
+                drawXAxisValue(c, label, x, pos, mAxisLabelPaint, anchor, labelRotationAngleDegrees);
             }
         }
     }
 
 
-    public static void drawXAxisValue(Canvas c, String text, float x, float y,
-                                      Paint paint,
-                                      MPPointF anchor, float angleDegrees) {
+    public void drawXAxisValue(Canvas c, String text, float x, float y,
+                               Paint paint,
+                               MPPointF anchor, float angleDegrees) {
 
         float drawOffsetX = 0.f;
         float drawOffsetY = 0.f;
@@ -82,56 +88,47 @@ public class MyXAxisRenderer extends XAxisRenderer {
         // Android sometimes has pre-padding
         drawOffsetX -= mDrawTextRectBuffer.left;
 
-        // Android does not snap the bounds to line boundaries,
-        //  and draws from bottom to top.
-        // And we want to normalize it.
         drawOffsetY += -mFontMetricsBuffer.ascent;
 
-        // To have a consistent point of reference, we always draw left-aligned
         Paint.Align originalTextAlign = paint.getTextAlign();
         paint.setTextAlign(Paint.Align.LEFT);
 
-        if (angleDegrees != 0.f) {
-
-            // Move the text drawing rect in a way that it always rotates around its center
-            drawOffsetX -= mDrawTextRectBuffer.width() * 0.5f;
-            drawOffsetY -= lineHeight * 0.5f;
-
-            float translateX = x;
-            float translateY = y;
-
-            // Move the "outer" rect relative to the anchor, assuming its centered
-            if (anchor.x != 0.5f || anchor.y != 0.5f) {
-                final FSize rotatedSize = Utils.getSizeOfRotatedRectangleByDegrees(
-                        mDrawTextRectBuffer.width(),
-                        lineHeight,
-                        angleDegrees);
-
-                translateX -= rotatedSize.width * (anchor.x - 0.5f);
-                translateY -= rotatedSize.height * (anchor.y - 0.5f);
-                FSize.recycleInstance(rotatedSize);
-            }
-
-            c.save();
-            c.translate(translateX, translateY);
-            c.rotate(angleDegrees);
-
-            c.drawText(text, drawOffsetX, drawOffsetY, paint);
-
-            c.restore();
-        } else {
+        //以上注释是源码的逻辑，下面的是自己的逻辑，重新计算drawOffsetY
+        if (text.contains("月")) {//带月的显示规则
+            paint.setColor(Color.parseColor("#D0C3DB"));
+            String month = "("+text.substring(0,text.indexOf("月")+1)+")";
+            drawText(c,paint,month,9,anchor,drawOffsetX,drawOffsetY, x,31);
+            drawText(c,paint,text.substring(text.indexOf("月")+1),11,anchor,drawOffsetX,
+                    drawOffsetY,x,unSelectBottom);
+        } else if (text.equals("29日")) {//被选中
+            paint.setColor(Color.parseColor("#ffffff"));
+            paint.setTextSize(Utils.convertDpToPixel(14));
+            paint.getTextBounds(text, 0, text.length(), mDrawTextRectBuffer);
             if (anchor.x != 0.f || anchor.y != 0.f) {
-
                 drawOffsetX -= mDrawTextRectBuffer.width() * anchor.x;
-                drawOffsetY -= lineHeight * anchor.y;
             }
-
             drawOffsetX += x;
-            drawOffsetY += y;
-
+            drawOffsetY = xAxisHeight - Utils.convertDpToPixel(selectBottom);//距离顶部11个dp
             c.drawText(text, drawOffsetX, drawOffsetY, paint);
+        } else {//未被选中
+            drawText(c,paint,text,11,anchor,drawOffsetX,drawOffsetY,x,unSelectBottom);
         }
-
+        paint.setStrokeWidth(Utils.convertDpToPixel(1f));
+        c.drawLine(x, xAxisHeight-Utils.convertDpToPixel(2), x, xAxisHeight - Utils
+                .convertDpToPixel(10f), paint);
         paint.setTextAlign(originalTextAlign);
+    }
+
+    private void drawText(Canvas c,Paint paint,String text,float textsize,MPPointF anchor,float
+            drawOffsetX,float drawOffsetY,float x,float marginBottom){
+        paint.setColor(Color.parseColor("#D0C3DB"));
+        paint.setTextSize(Utils.convertDpToPixel(textsize));
+        paint.getTextBounds(text, 0, text.length(), mDrawTextRectBuffer);
+        if (anchor.x != 0.f || anchor.y != 0.f) {
+            drawOffsetX -= mDrawTextRectBuffer.width() * anchor.x;
+        }
+        drawOffsetX += x;
+        drawOffsetY = xAxisHeight - Utils.convertDpToPixel(marginBottom);//距离顶部11个dp
+        c.drawText(text, drawOffsetX, drawOffsetY, paint);
     }
 }

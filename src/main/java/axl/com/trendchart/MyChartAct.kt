@@ -60,7 +60,7 @@ class MyChartAct : AppCompatActivity() {
 
         lineChart1.rendererXAxis
         xAxis.labelCount = visiableCount
-        xAxis.setAvoidFirstLastClipping(true)
+//        xAxis.setAvoidFirstLastClipping(true)
         xAxis.setDrawAxisLine(false)
 
         xAxis.setDrawGridLines(true) //设置x轴上每个点对应的线
@@ -74,7 +74,7 @@ class MyChartAct : AppCompatActivity() {
                 29f -> "昨日"
                 28f -> "3日"
                 27f -> "2日"
-                26f -> "12月/n1日"
+                26f -> "12月1日"
                 25f -> "30日"
                 24f -> "29日"
                 23f -> "28日"
