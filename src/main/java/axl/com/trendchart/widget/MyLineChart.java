@@ -15,6 +15,20 @@ public class MyLineChart extends LineChart {
     private Paint bottomPaint;
     public boolean isFirst = false;
     public boolean isDrawDivider = true;
+
+    //设置头部的颜色，默认紫色
+    private String headerColor = "#895BE6";
+    //底部分隔线的颜色
+    private String dividerColor = "#f7f7f7";
+
+    public void setDividerColor(String dividerColor) {
+        this.dividerColor = dividerColor;
+    }
+
+    public void setHeaderColor(String headerColor) {
+        this.headerColor = headerColor;
+    }
+
     public MyLineChart(Context context) {
         super(context);
         initSetting();
@@ -30,29 +44,30 @@ public class MyLineChart extends LineChart {
         initSetting();
     }
 
-    private void initSetting(){
+    private void initSetting() {
         bottomPaint = new Paint();
         bottomPaint.setStyle(Paint.Style.FILL);
     }
 
     @Override
     protected void onDraw(Canvas canvas) {
-        if (mData == null){
-            super.onDraw(canvas);
-            return;
-        }
-
 
         int save = canvas.save();
-        if (isFirst){
+        if (isFirst) {
             //头部的紫色背景
-            bottomPaint.setColor(Color.parseColor("#895BE6"));
-            canvas.drawRect(new RectF(0, 0, getMeasuredWidth(),Utils.convertDpToPixel(45)),
+            bottomPaint.setColor(Color.parseColor(headerColor));
+            canvas.drawRect(new RectF(0, 0, getMeasuredWidth(), Utils.convertDpToPixel(45)),
                     bottomPaint);
             canvas.restoreToCount(save);
         }
 
 
+        if (mData == null) {
+            super.onDraw(canvas);
+            return;
+        }
+
+        long starttime = System.currentTimeMillis();
 
         // execute all drawing commands
         drawGridBackground(canvas);
@@ -70,32 +85,53 @@ public class MyLineChart extends LineChart {
         if (mXAxis.isEnabled())
             mXAxisRenderer.computeAxis(mXAxis.mAxisMinimum, mXAxis.mAxisMaximum, false);
 
+        mXAxisRenderer.renderAxisLine(canvas);
+        mAxisRendererLeft.renderAxisLine(canvas);
+        mAxisRendererRight.renderAxisLine(canvas);
+
+        mXAxisRenderer.renderGridLines(canvas);
+        mAxisRendererLeft.renderGridLines(canvas);
+        mAxisRendererRight.renderGridLines(canvas);
+
+
         // make sure the data cannot be drawn outside the content-rect
         int clipRestoreCount = canvas.save();
         canvas.clipRect(mViewPortHandler.getContentRect());
 
         mRenderer.drawData(canvas);
 
-        // Removes clipping rectangle
-        canvas.restoreToCount(clipRestoreCount);
-
-        if (isDrawDivider){
+        if (isDrawDivider) {
             //底部的分隔横线
             save = canvas.save();
-            bottomPaint.setColor(Color.parseColor("#f7f7f7"));
-            canvas.drawRect(new RectF(0, getMeasuredHeight()-Utils.convertDpToPixel(7), getMeasuredWidth(),
+            bottomPaint.setColor(Color.parseColor(dividerColor));
+            canvas.drawRect(new RectF(0, getMeasuredHeight() - Utils.convertDpToPixel(7), getMeasuredWidth(),
                     getMeasuredHeight()), bottomPaint);
             canvas.restoreToCount(save);
         }
 
-        mXAxisRenderer.renderGridLines(canvas);
-        mAxisRendererLeft.renderGridLines(canvas);
-        mAxisRendererRight.renderGridLines(canvas);
         // if highlighting is enabled
         if (valuesToHighlight())
             mRenderer.drawHighlighted(canvas, mIndicesToHighlight);
 
-        //头部的刻度线
+        // Removes clipping rectangle
+        canvas.restoreToCount(clipRestoreCount);
+
+        //补充后面缺失的分隔线
+        if (isDrawDivider) {
+            //底部的分隔横线
+            save = canvas.save();
+            bottomPaint.setColor(Color.parseColor(dividerColor));
+            canvas.drawRect(new RectF(
+                    getMeasuredWidth() - Utils.convertDpToPixel(94f),
+                    getMeasuredHeight() - Utils.convertDpToPixel(7),
+                    getMeasuredWidth(),
+                    getMeasuredHeight()), bottomPaint);
+            canvas.restoreToCount(save);
+        }
+
+        mRenderer.drawExtras(canvas);
+
+
         mXAxisRenderer.renderAxisLabels(canvas);
         mAxisRendererLeft.renderAxisLabels(canvas);
         mAxisRendererRight.renderAxisLabels(canvas);
@@ -110,5 +146,6 @@ public class MyLineChart extends LineChart {
         } else {
             mRenderer.drawValues(canvas);
         }
+
     }
 }
