@@ -14,6 +14,8 @@ import com.github.mikephil.charting.utils.Utils;
 public class MyLineChart extends LineChart {
     private Paint bottomPaint;
     public boolean isFirst = false;
+    //是否漂浮View
+    public boolean isFloat = false;
     public boolean isDrawDivider = true;
 
     //设置头部的颜色，默认紫色
