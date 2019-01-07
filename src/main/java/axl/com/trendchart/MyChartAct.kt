@@ -211,6 +211,7 @@ class MyChartAct : AppCompatActivity() {
         lineChart1.setScaleEnabled(true) //启用图表缩放事件
         lineChart1.setDrawBorders(false) //是否绘制边线
         lineChart1.isDragEnabled = true
+        lineChart1.setAutoScaleMinMaxEnabled(true)
         lineChart1.isScaleYEnabled = false
         lineChart1.minOffset = 0f
         lineChart1.description = null

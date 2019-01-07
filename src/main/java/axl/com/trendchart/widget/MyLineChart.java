@@ -6,6 +6,7 @@ import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.RectF;
 import android.util.AttributeSet;
+import android.util.Log;
 
 import com.github.mikephil.charting.charts.LineChart;
 import com.github.mikephil.charting.utils.Utils;
@@ -36,8 +37,13 @@ public class MyLineChart extends LineChart {
 
     @Override
     protected void onDraw(Canvas canvas) {
-        int save = canvas.save();
+        if (mData == null){
+            super.onDraw(canvas);
+            return;
+        }
 
+
+        int save = canvas.save();
         if (isFirst){
             //头部的紫色背景
             bottomPaint.setColor(Color.parseColor("#895BE6"));
@@ -45,6 +51,7 @@ public class MyLineChart extends LineChart {
                     bottomPaint);
             canvas.restoreToCount(save);
         }
+
         if (isDrawDivider){
             //底部的分隔横线
             save = canvas.save();
@@ -53,8 +60,58 @@ public class MyLineChart extends LineChart {
                     getMeasuredHeight()), bottomPaint);
             canvas.restoreToCount(save);
         }
-        super.onDraw(canvas);
 
+        // execute all drawing commands
+        drawGridBackground(canvas);
 
+        if (mAutoScaleMinMaxEnabled) {
+            autoScale();
+        }
+
+        if (mAxisLeft.isEnabled())
+            mAxisRendererLeft.computeAxis(mAxisLeft.mAxisMinimum, mAxisLeft.mAxisMaximum, mAxisLeft.isInverted());
+
+        if (mAxisRight.isEnabled())
+            mAxisRendererRight.computeAxis(mAxisRight.mAxisMinimum, mAxisRight.mAxisMaximum, mAxisRight.isInverted());
+
+        if (mXAxis.isEnabled())
+            mXAxisRenderer.computeAxis(mXAxis.mAxisMinimum, mXAxis.mAxisMaximum, false);
+
+        mXAxisRenderer.renderAxisLine(canvas);
+        mAxisRendererLeft.renderAxisLine(canvas);
+        mAxisRendererRight.renderAxisLine(canvas);
+
+        mXAxisRenderer.renderGridLines(canvas);
+        mAxisRendererLeft.renderGridLines(canvas);
+        mAxisRendererRight.renderGridLines(canvas);
+
+        // make sure the data cannot be drawn outside the content-rect
+        int clipRestoreCount = canvas.save();
+        canvas.clipRect(mViewPortHandler.getContentRect());
+
+        mRenderer.drawData(canvas);
+
+        // if highlighting is enabled
+        if (valuesToHighlight())
+            mRenderer.drawHighlighted(canvas, mIndicesToHighlight);
+        // Removes clipping rectangle
+        canvas.restoreToCount(clipRestoreCount);
+
+        mRenderer.drawExtras(canvas);
+
+        mXAxisRenderer.renderAxisLabels(canvas);
+        mAxisRendererLeft.renderAxisLabels(canvas);
+        mAxisRendererRight.renderAxisLabels(canvas);
+
+        if (isClipValuesToContentEnabled()) {
+            clipRestoreCount = canvas.save();
+            canvas.clipRect(mViewPortHandler.getContentRect());
+
+            mRenderer.drawValues(canvas);
+
+            canvas.restoreToCount(clipRestoreCount);
+        } else {
+            mRenderer.drawValues(canvas);
+        }
     }
 }
