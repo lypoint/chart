@@ -21,6 +21,9 @@ public class MyLineChart extends LineChart {
     //底部分隔线的颜色
     private String dividerColor = "#f7f7f7";
 
+    //是否是漂浮的头部
+    public boolean isFloatHeader = false;
+
     public void setDividerColor(String dividerColor) {
         this.dividerColor = dividerColor;
     }
@@ -67,7 +70,7 @@ public class MyLineChart extends LineChart {
             return;
         }
 
-        long starttime = System.currentTimeMillis();
+        //        long starttime = System.currentTimeMillis();
 
         // execute all drawing commands
         drawGridBackground(canvas);
@@ -89,16 +92,15 @@ public class MyLineChart extends LineChart {
         mAxisRendererLeft.renderAxisLine(canvas);
         mAxisRendererRight.renderAxisLine(canvas);
 
-        mXAxisRenderer.renderGridLines(canvas);
-        mAxisRendererLeft.renderGridLines(canvas);
-        mAxisRendererRight.renderGridLines(canvas);
+
 
 
         // make sure the data cannot be drawn outside the content-rect
         int clipRestoreCount = canvas.save();
         canvas.clipRect(mViewPortHandler.getContentRect());
 
-        mRenderer.drawData(canvas);
+        if (!isFloatHeader)
+            mRenderer.drawData(canvas);
 
         if (isDrawDivider) {
             //底部的分隔横线
@@ -108,6 +110,9 @@ public class MyLineChart extends LineChart {
                     getMeasuredHeight()), bottomPaint);
             canvas.restoreToCount(save);
         }
+        mXAxisRenderer.renderGridLines(canvas);
+        mAxisRendererLeft.renderGridLines(canvas);
+        mAxisRendererRight.renderGridLines(canvas);
 
         // if highlighting is enabled
         if (valuesToHighlight())

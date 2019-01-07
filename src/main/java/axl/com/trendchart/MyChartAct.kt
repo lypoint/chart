@@ -58,6 +58,7 @@ class MyChartAct : AppCompatActivity() {
         lineChart1.isScaleYEnabled = false
         lineChart1.minOffset = 0f
         lineChart1.description = null
+        lineChart1.isFloatHeader = true
 
         val legend = lineChart1.legend
         legend.isEnabled = false
