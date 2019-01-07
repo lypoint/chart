@@ -52,14 +52,7 @@ public class MyLineChart extends LineChart {
             canvas.restoreToCount(save);
         }
 
-        if (isDrawDivider){
-            //底部的分隔横线
-            save = canvas.save();
-            bottomPaint.setColor(Color.parseColor("#f7f7f7"));
-            canvas.drawRect(new RectF(0, getMeasuredHeight()-Utils.convertDpToPixel(7), getMeasuredWidth(),
-                    getMeasuredHeight()), bottomPaint);
-            canvas.restoreToCount(save);
-        }
+
 
         // execute all drawing commands
         drawGridBackground(canvas);
@@ -77,28 +70,32 @@ public class MyLineChart extends LineChart {
         if (mXAxis.isEnabled())
             mXAxisRenderer.computeAxis(mXAxis.mAxisMinimum, mXAxis.mAxisMaximum, false);
 
-        mXAxisRenderer.renderAxisLine(canvas);
-        mAxisRendererLeft.renderAxisLine(canvas);
-        mAxisRendererRight.renderAxisLine(canvas);
-
-        mXAxisRenderer.renderGridLines(canvas);
-        mAxisRendererLeft.renderGridLines(canvas);
-        mAxisRendererRight.renderGridLines(canvas);
-
         // make sure the data cannot be drawn outside the content-rect
         int clipRestoreCount = canvas.save();
         canvas.clipRect(mViewPortHandler.getContentRect());
 
         mRenderer.drawData(canvas);
 
-        // if highlighting is enabled
-        if (valuesToHighlight())
-            mRenderer.drawHighlighted(canvas, mIndicesToHighlight);
         // Removes clipping rectangle
         canvas.restoreToCount(clipRestoreCount);
 
-        mRenderer.drawExtras(canvas);
+        if (isDrawDivider){
+            //底部的分隔横线
+            save = canvas.save();
+            bottomPaint.setColor(Color.parseColor("#f7f7f7"));
+            canvas.drawRect(new RectF(0, getMeasuredHeight()-Utils.convertDpToPixel(7), getMeasuredWidth(),
+                    getMeasuredHeight()), bottomPaint);
+            canvas.restoreToCount(save);
+        }
 
+        mXAxisRenderer.renderGridLines(canvas);
+        mAxisRendererLeft.renderGridLines(canvas);
+        mAxisRendererRight.renderGridLines(canvas);
+        // if highlighting is enabled
+        if (valuesToHighlight())
+            mRenderer.drawHighlighted(canvas, mIndicesToHighlight);
+
+        //头部的刻度线
         mXAxisRenderer.renderAxisLabels(canvas);
         mAxisRendererLeft.renderAxisLabels(canvas);
         mAxisRendererRight.renderAxisLabels(canvas);
