@@ -21,8 +21,18 @@ class MyXAxisRenderer(var xAxisData: HashMap<String, XAXisModel>, viewPortHandle
     private val unSelectBottom = 15
     //可绘制的总体高度
     private val xAxisHeight = Utils.convertDpToPixel(45f)
-    //是否漂浮
-    private var isFloat = false
+    //选中字体的颜色
+    var selectColor = "#ffffff"
+    //未选中字体的颜色
+    var unSelectColor = "#D0C3DB"
+    //选中字体的大小
+    var selectSizeDP = 14f
+    //未选中字体的大小
+    var unSelectSizeDP = 11f
+    //月的字体大小
+    var monthSizeDP = 9f
+
+
     override fun drawLabels(c: Canvas, pos: Float, anchor: MPPointF) {
         val labelRotationAngleDegrees = mXAxis.labelRotationAngle
         val centeringEnabled = mXAxis.isCenterAxisLabelsEnabled
@@ -74,7 +84,6 @@ class MyXAxisRenderer(var xAxisData: HashMap<String, XAXisModel>, viewPortHandle
 
 
     fun drawXAxisValue(c: Canvas, text: String, x: Float, y: Float, paint: Paint, anchor: MPPointF, angleDegrees: Float) {
-
         var valueText = xAxisData[text]
         if (valueText != null) {
             var drawOffsetX = 0f
@@ -88,17 +97,17 @@ class MyXAxisRenderer(var xAxisData: HashMap<String, XAXisModel>, viewPortHandle
 
             if (!TextUtils.isEmpty(valueText.month)) { //带月的显示规则
                 if (valueText.isSelected) {
-                    paint.color = Color.parseColor("#ffffff")
-                    drawText(c, paint, valueText.month, 9f, anchor, drawOffsetX, drawOffsetY, x, 31f)
-                    drawText(c, paint, valueText.day, 14f, anchor, drawOffsetX, drawOffsetY, x, unSelectBottom.toFloat())
+                    paint.color = Color.parseColor(selectColor)
+                    drawText(c, paint, valueText.month, monthSizeDP, anchor, drawOffsetX, drawOffsetY, x, 31f)
+                    drawText(c, paint, valueText.day, selectSizeDP, anchor, drawOffsetX, drawOffsetY, x, unSelectBottom.toFloat())
                 } else {
-                    paint.color = Color.parseColor("#D0C3DB")
-                    drawText(c, paint, valueText.month, 9f, anchor, drawOffsetX, drawOffsetY, x, 31f)
-                    drawText(c, paint, valueText.day, 11f, anchor, drawOffsetX, drawOffsetY, x, unSelectBottom.toFloat())
+                    paint.color = Color.parseColor(unSelectColor)
+                    drawText(c, paint, valueText.month, monthSizeDP, anchor, drawOffsetX, drawOffsetY, x, 31f)
+                    drawText(c, paint, valueText.day, unSelectSizeDP, anchor, drawOffsetX, drawOffsetY, x, unSelectBottom.toFloat())
                 }
             } else if (valueText.isSelected) { //被选中
-                paint.color = Color.parseColor("#ffffff")
-                paint.textSize = Utils.convertDpToPixel(14f)
+                paint.color = Color.parseColor(selectColor)
+                paint.textSize = Utils.convertDpToPixel(selectSizeDP)
                 paint.getTextBounds(text, 0, text.length, mDrawTextRectBuffer)
                 if (anchor.x != 0f || anchor.y != 0f) {
                     drawOffsetX -= mDrawTextRectBuffer.width() * anchor.x
@@ -107,8 +116,8 @@ class MyXAxisRenderer(var xAxisData: HashMap<String, XAXisModel>, viewPortHandle
                 drawOffsetY = xAxisHeight - Utils.convertDpToPixel(selectBottom.toFloat()) //距离顶部11个dp
                 c.drawText(valueText.day, drawOffsetX, drawOffsetY, paint)
             } else { //未被选中
-                paint.color = Color.parseColor("#D0C3DB")
-                drawText(c, paint, valueText.day, 11f, anchor, drawOffsetX, drawOffsetY, x, unSelectBottom.toFloat())
+                paint.color = Color.parseColor(unSelectColor)
+                drawText(c, paint, valueText.day, unSelectSizeDP, anchor, drawOffsetX, drawOffsetY, x, unSelectBottom.toFloat())
             }
             paint.strokeWidth = Utils.convertDpToPixel(1f)
             c.drawLine(x, xAxisHeight - Utils.convertDpToPixel(2f), x, xAxisHeight - Utils.convertDpToPixel(10f), paint)
